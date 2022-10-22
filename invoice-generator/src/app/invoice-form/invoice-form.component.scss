@@ -1,0 +1,15 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+}
+
+.mat-form-field {
+    margin-right: 2em;
+}
+
+.align-center {
+    display: flex;
+    align-items: center;
+    margin: 2em 0;
+}

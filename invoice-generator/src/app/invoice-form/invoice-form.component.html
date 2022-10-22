@@ -1,0 +1,61 @@
+<form class="form-container" [formGroup]="form">
+    <ng-container *ngIf="invoiceItems.controls" formArrayName="invoiceItems">
+    <ng-container *ngFor="let itemForm of invoiceItems?.controls, let i = index">
+        <div [formGroup]="itemForm" [formGroupName]="i">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="nameControl" required>
+                    <mat-error *ngIf="itemForm.controls.nameControl.hasError('required')">
+                    Name is required
+                  </mat-error>
+                  <mat-error *ngIf="itemForm.controls.nameControl.hasError('minlength')">
+                    Min length is 3
+                  </mat-error>
+                  <mat-error *ngIf="itemForm.controls.nameControl.hasError('maxlength')">
+                    Max length is 30
+                  </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Count</mat-label>
+                <input matInput formControlName="countControl" required>
+                <mat-error *ngIf="itemForm.controls.countControl.hasError('required')">
+                    Count is required
+                </mat-error>
+                <mat-error *ngIf="itemForm.controls.countControl.hasError('min')">
+                    Min value is 1
+                </mat-error>
+                <mat-error *ngIf="itemForm.controls.countControl.hasError('max')">
+                    Max value is 1000000
+                </mat-error>
+                <mat-error *ngIf="itemForm.controls.countControl.hasError('pattern')">
+                    Numbers only
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Price</mat-label>
+                <input matInput formControlName="priceControl" required>
+                <mat-error *ngIf="itemForm.controls.priceControl.hasError('required')">
+                    Price is required
+                </mat-error>
+                <mat-error *ngIf="itemForm.controls.priceControl.hasError('min')">
+                    Min 1 
+                </mat-error>
+                <mat-error *ngIf="itemForm.controls.priceControl.hasError('max')">
+                    Max 100 
+                </mat-error>
+                <mat-error *ngIf="itemForm.controls.priceControl.hasError('pattern')">
+                    Numbers only
+                </mat-error>
+            </mat-form-field>
+            <button mat-button matTooltip="Remove item"><mat-icon color='primary' (click)="deleteItem(i)">delete</mat-icon></button>
+        </div>
+    </ng-container>
+</ng-container>
+
+    <div class="align-center">
+        <button mat-stroked-button color='primary' (click)="addNewItem()"><mat-icon style="margin-right: 5px;">add</mat-icon>Add new item</button>
+    </div>
+   <div>
+    <button mat-raised-button type="submit" color="primary" (click)="onSubmit();this.form.markAllAsTouched()">Submit</button>
+   </div>
+</form>
