@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { SidenavContentComponent } from './sidenav-content/sidenav-content.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -25,7 +24,6 @@ import { InvoiceService } from './invoice.service';
   declarations: [
     AppComponent,
     SidenavComponent,
-    SidenavContentComponent,
     InvoiceFormComponent,
     PopupDialogComponent,
     PreviewInvoiceComponent,

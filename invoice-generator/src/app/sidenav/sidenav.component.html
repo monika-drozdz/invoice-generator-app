@@ -1,6 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav mode="side" opened>
-        <mat-toolbar color='primary'>
+    <mat-sidenav #sidenav mode="side" [(opened)]="isMenuOpen">
+        <mat-toolbar>
             <span>Menu</span>
         </mat-toolbar>
         <mat-toolbar-row>
@@ -12,6 +12,9 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mat-toolbar color='primary'>
+            <button mat-button (click)="sidenav.toggle()">
+                <mat-icon>{{ isMenuOpen ? 'menu_open' : 'menu' }}</mat-icon>
+            </button>
             <span>KLC invoice generator</span>
         </mat-toolbar>
         <router-outlet></router-outlet>

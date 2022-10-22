@@ -1,7 +1,12 @@
-.table-container {
+.preview-container {
     padding: 2em;
+
+    & > * {
+        margin-bottom: 2em; 
+    }
+
+    table {
+        width: 50%;
+    }
 }
 
-table {
-    width: 50%;
-}

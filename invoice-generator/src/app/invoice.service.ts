@@ -6,16 +6,13 @@ import { ReplaySubject } from 'rxjs';
   providedIn: 'root',
 })
 export class InvoiceService {
-  private companySource = new ReplaySubject<any>();
-  company$ = this.companySource.asObservable();
-
   private invoiceItemsSource = new ReplaySubject<InvoiceItem[]>();
   invoiceItems$ = this.invoiceItemsSource.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
-  getCompanyInfo() {
-    // TODO this.http.get
+  getCompany() {
+    return this.httpClient.get<Company>('http://localhost:3000/company');
   }
 
   submitInvoiceItems(items: InvoiceItem[]) {
@@ -27,4 +24,10 @@ export interface InvoiceItem {
   name: string;
   count: number;
   price: number;
+}
+
+export interface Company {
+  name: string;
+  address: string;
+  phones: string[];
 }
