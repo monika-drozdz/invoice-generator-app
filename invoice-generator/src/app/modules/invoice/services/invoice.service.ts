@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
+import { Company } from '../models/company';
+import { InvoiceItem } from '../models/invoiceItems';
 
 @Injectable({
   providedIn: 'root',
@@ -18,16 +20,4 @@ export class InvoiceService {
   submitInvoiceItems(items: InvoiceItem[]) {
     this.invoiceItemsSource.next(items);
   }
-}
-
-export interface InvoiceItem {
-  name: string;
-  count: number;
-  price: number;
-}
-
-export interface Company {
-  name: string;
-  address: string;
-  phones: string[];
 }

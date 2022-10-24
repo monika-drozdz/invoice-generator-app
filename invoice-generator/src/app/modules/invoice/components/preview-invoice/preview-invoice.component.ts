@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-
-import { Company, InvoiceItem, InvoiceService } from '../invoice.service';
+import { Company } from '../../models/company';
+import { InvoiceItem } from '../../models/invoiceItems';
+import { InvoiceService } from '../../services/invoice.service';
 
 @Component({
   selector: 'app-preview-invoice',

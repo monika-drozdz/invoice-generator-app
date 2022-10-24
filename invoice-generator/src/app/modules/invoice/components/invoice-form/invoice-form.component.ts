@@ -3,24 +3,23 @@ import {
   FormArray,
   FormBuilder,
   FormControl,
+  FormGroup,
   Validators,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { InvoiceService } from '../invoice.service';
-import { PopupDialogComponent } from '../popup-dialog/popup-dialog.component';
+import { PopupDialogComponent } from '../../../shared/components/popup-dialog/popup-dialog.component';
+import { InvoiceService } from '../../services/invoice.service';
+
 @Component({
   selector: 'app-invoice-form',
   templateUrl: './invoice-form.component.html',
   styleUrls: ['./invoice-form.component.scss'],
 })
 export class InvoiceFormComponent implements OnInit {
-  form = this.fb.group({
-    invoiceItems: this.fb.array([]),
-  });
-
   isFormArrayValid: boolean;
-
+  form: FormGroup;
+  invoiceItems: FormArray;
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
@@ -28,9 +27,11 @@ export class InvoiceFormComponent implements OnInit {
     private router: Router
   ) {}
 
-  invoiceItems = this.form.get('invoiceItems') as FormArray;
-
   ngOnInit(): void {
+    this.form = this.fb.group({
+      invoiceItems: this.fb.array([]),
+    });
+    this.invoiceItems = this.form.get('invoiceItems') as FormArray;
     this.addNewItem();
   }
 
@@ -65,12 +66,7 @@ export class InvoiceFormComponent implements OnInit {
     const validItems = this.invoiceItems.controls.filter(
       (item) => item.status === 'VALID'
     );
-    validItems.length > 0
-      ? (this.isFormArrayValid = true)
-      : (this.isFormArrayValid = false);
-    if (!this.isFormArrayValid) {
-      this.dialog.open(PopupDialogComponent);
-    } else {
+    if (this.isAnyValidItemInFormArray(validItems)) {
       const invoiceItems = validItems.map((item) => item.value);
       const sum = invoiceItems
         .map((item) => item.countControl * item.priceControl)
@@ -78,6 +74,12 @@ export class InvoiceFormComponent implements OnInit {
       invoiceItems.push({ total: sum });
       this.invoiceService.submitInvoiceItems(invoiceItems);
       this.router.navigate(['/preview']);
+    } else {
+      this.dialog.open(PopupDialogComponent);
     }
+  }
+
+  isAnyValidItemInFormArray(validItems: Array<any>) {
+    return validItems.length > 0 ? true : false;
   }
 }

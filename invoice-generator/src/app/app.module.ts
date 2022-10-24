@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SidenavComponent } from './sidenav/sidenav.component';
+import { SidenavComponent } from './modules/invoice/components/sidenav/sidenav.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,14 +12,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
-import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
+import { InvoiceFormComponent } from './modules/invoice/components/invoice-form/invoice-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HttpClientModule } from '@angular/common/http';
-import { PopupDialogComponent } from './popup-dialog/popup-dialog.component';
-import { PreviewInvoiceComponent } from './preview-invoice/preview-invoice.component';
+import { PopupDialogComponent } from './modules/shared/components/popup-dialog/popup-dialog.component';
+import { PreviewInvoiceComponent } from './modules/invoice/components/preview-invoice/preview-invoice.component';
 import { AppRoutingModule } from './app-routing.module';
-import { InvoiceService } from './invoice.service';
+import { InvoiceService } from './modules/invoice/services/invoice.service';
 @NgModule({
   declarations: [
     AppComponent,
